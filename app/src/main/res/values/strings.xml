@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Lab 3 - Lifecyle Awareness</string>
+
+    <string name="action_connect">Connect</string>
+    <string name="display_response_message">Response Text Here</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
