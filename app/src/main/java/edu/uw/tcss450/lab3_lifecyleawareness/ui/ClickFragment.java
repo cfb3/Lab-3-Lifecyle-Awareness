@@ -20,6 +20,8 @@ import edu.uw.tcss450.lab3_lifecyleawareness.databinding.FragmentClickBinding;
  */
 public class ClickFragment extends Fragment {
 
+    private int mCount;
+
     public ClickFragment() {
         // Required empty public constructor
     }
@@ -28,7 +30,7 @@ public class ClickFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d("CLICK FRAGMENT", "onCreate() current state-" + getLifecycle().getCurrentState());
-
+        mCount = 0;
     }
 
     @Override
@@ -42,17 +44,25 @@ public class ClickFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         FragmentClickBinding binding = FragmentClickBinding.bind(getView());
-        //Obtain access to the ViewModel. If this fragment object is new, the ViewModel
-        //will be re/created. Note the parameter to the ViewModelProvider constructor.
-        IncrementorViewModel model =
-                new ViewModelProvider(getActivity()).get(IncrementorViewModel.class);
 
-        //Add an observer the the MutableLiveData - mCount.
-        model.addCountObserver(getViewLifecycleOwner(), count ->
-                binding.textCount.setText("My Count is: " + model.getCount()));
+        binding.textCount.setText("The count is: " + mCount);
 
-        //On button click, increase the MutableLiveData - mCount
-        binding.buttonIncrement.setOnClickListener(button -> model.increment());
+        binding.buttonIncrement.setOnClickListener(button -> {
+            mCount++;
+            binding.textCount.setText("The count is: " + mCount);
+        });
+
+//        //Obtain access to the ViewModel. If this fragment object is new, the ViewModel
+//        //will be re/created. Note the parameter to the ViewModelProvider constructor.
+//        IncrementorViewModel model =
+//                new ViewModelProvider(getActivity()).get(IncrementorViewModel.class);
+//
+//        //Add an observer the the MutableLiveData - mCount.
+//        model.addCountObserver(getViewLifecycleOwner(), count ->
+//                binding.textCount.setText("My Count is: " + model.getCount()));
+//
+//        //On button click, increase the MutableLiveData - mCount
+//        binding.buttonIncrement.setOnClickListener(button -> model.increment());
     }
 
     @Override
